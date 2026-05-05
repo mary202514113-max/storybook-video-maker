@@ -1,0 +1,23 @@
+# storybook-video-maker 依赖
+# 安装: pip install -r requirements.txt
+
+# Web 界面
+streamlit>=1.28.0
+
+# 音频生成（免费）
+edge-tts>=6.1.0
+
+# 字幕识别（免费）
+openai-whisper
+
+# FFmpeg Python绑定
+ffmpeg-python>=0.2.0
+
+# 配置文件
+pyyaml>=6.0
+
+# HTTP请求（API调用用）
+httpx>=0.25.0
+
+# 字幕处理
+srt>=3.0.0

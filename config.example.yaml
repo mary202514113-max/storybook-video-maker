@@ -1,0 +1,83 @@
+# storybook-video-maker 配置文件
+# 将此文件复制为 config.yaml 并填入你的 API 密钥
+
+# ========== MiniMax 图片生成 API ==========
+minimax:
+  api_key: ""          # MiniMax API Key（留空则使用本地图片目录）
+  group_id: ""         # MiniMax Group ID
+  model: "MiniMax-Image-01"
+  image_dir: "inputs/images"   # 本地图片目录（无API时使用）
+
+# ========== HuggingFace SVD 图生视频 API（可选） ==========
+huggingface:
+  api_key: ""          # HuggingFace API Token（免费额度有限）
+  endpoint: "stabilityai/stable-video-diffusion-img2vid-xt"
+  # 免费使用 https://api-inference.huggingface.co/models/stabilityai/stable-video-diffusion-img2vid-xt
+  # 需要先在 huggingface.co/settings/tokens 生成 token
+
+# ========== 音频配置（完全免费） ==========
+audio:
+  voice: "en-GB-RyanNeural"   # 英式英语男声（温暖有童话感）
+  speed: 0.9                  # 语速 -10%
+  rate: "-10%"                # edge-tts 语速参数
+  volume: "+0%"               # 音量调整
+  pitch: "-2Hz"              # 音调微降
+
+# ========== 视频配置 ==========
+video:
+  width: 1080                 # 竖版宽度
+  height: 1920                # 竖版高度
+  fps: 24                     # 帧率
+  codec: "libx264"            # H.264 编码
+  crf: 23                     # 质量参数（越低越清晰）
+  preset: "medium"           # 编码速度
+
+  # ========== FFmpeg 电影感运镜（$0成本核心） ==========
+  ken_burns:
+    enabled: true
+    duration_per_image: 5    # 每张图展示时长（秒）
+    zoom_in: true             # true=放大，false=缩小
+    zoom_range: [1.0, 1.15]  # 缩放范围（从1.0到1.15）
+    pan_strength: 0.05       # 平移幅度（0.05 = 5%画面宽度）
+    easing: "easeInOut"      # 缓动函数
+
+  # ========== 场景切换效果 ==========
+  transitions:
+    type: "crossfade"         # crossfade / fade / wipe
+    duration: 1.0             # 切换时长（秒）
+
+  # ========== 竖版画面处理 ==========
+  portrait:
+    fill_mode: "blur"         # blur=模糊填充 / black=黑色填充 / stretch=拉伸
+    blur_strength: 50         # 模糊强度
+
+# ========== 字幕配置 ==========
+subtitle:
+  enabled: true
+  primary_lang: "en"         # 主字幕语言（白色）
+  secondary_lang: "zh"       # 副字幕语言（金色）
+  font_primary: "Arial"
+  font_secondary: "Arial"
+  fontsize_primary: 48
+  fontsize_secondary: 42
+  color_primary: "white"
+  color_secondary: "#FFD700" # 金色
+  position: "bottom"         # 位置：bottom / center
+  margin_bottom: 120
+
+# ========== Whisper 字幕识别 ==========
+whisper:
+  model: "base"              # tiny/base/small/medium/large
+  language: "en"
+  device: "cpu"              # cpu / cuda（留空自动检测）
+
+# ========== 项目路径 ==========
+paths:
+  input_dir: "inputs"
+  output_dir: "outputs"
+  temp_dir: "temp"
+
+# ========== 工具路径 ==========
+tools:
+  ffmpeg: "ffmpeg"           # ffmpeg 命令（留空自动查找）
+  ffprobe: "ffprobe"         # ffprobe 命令
